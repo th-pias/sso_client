@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ContactabilitySsoClient</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="nav">
+  <ul>
+    <% if current_user %>
+        <li><%= link_to 'Edit Profile', edit_user_path(current_user.id) %></li>
+        <li><%= link_to 'Logout', :logout, method: :post %></li>
+    <% else %>
+        <li><%= link_to 'Register', :signup %></li>
+        <li><%= link_to 'Login', :login %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div style="text-align: center">
+
+    <% if flash[:notice] %>
+      <div class="notification">
+        <p id="notice"><%= flash[:notice] %></p>
+      </div>
+    <% elsif flash[:alert] %>
+      <div class="notification">
+        <p id="alert"><%= flash[:alert] %></p>
+      </div>
+    <% end %>
+
+  <%= yield %>
+</div>
+
+</body>
+</html>
