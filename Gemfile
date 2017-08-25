@@ -49,3 +49,6 @@ gem 'sorcery'
 
 gem 'figaro'
 
+gem 'omniauth'
+gem 'omniauth-oauth2'
+

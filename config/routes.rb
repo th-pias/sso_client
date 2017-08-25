@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root :to => 'home#index'
   resources :user_sessions
+  get 'contactability_login' => 'user_sessions#login_with_contactability'
   resources :users do
     get :external_login, on: :collection
   end
@@ -8,6 +9,10 @@ Rails.application.routes.draw do
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
   get 'signup' => 'users#new', :as => :signup
+
+  # omniauth
+  get '/auth/:provider/callback' => 'user_sessions#create_from_provider'
+  get '/auth/failure' => 'user_sessions#failure'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
